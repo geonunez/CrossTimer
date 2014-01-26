@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "digib";
+    src: url(../font/DS-DIGIB.ttf) format("truetype");
+}
+
+#timer{
+	font-family: digib;
+	font-size:8em;
+	margin:100px 0 25px 0;
+	background: #4c4642;
+	border: 0.05em #101010 solid;
+	-webkit-border-radius: 0.05em;
+    border-radius: 0.05em;
+    color: #cf262a;
+    text-align:center;
+}
+
+#programmer{
+	color: #009cd8;
+	border-right: 0.05em #101010 solid;
+    text-align:center;
+}
+
+#clock{
+	color: #cf262a;
+    text-align:center;
+    
+}
+
+#clock input{
+	color: #cf262a;
+	background: transparent;
+	border: none;
+	width: 1em;
+}
+
+div.up{
+	margin-top: 15px;
+}
+
+@media screen and (max-width:480px){
+   #clock input{
+     font-size:40%; 
+   }
+}
+
+
+@media screen and (max-width:1024px){
+   #clock input{
+     font-size:80%; 
+   }
+}

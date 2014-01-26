@@ -1,0 +1,75 @@
+<!doctype html>
+<html ng-app="app" ng-controller="timerController">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Geonunez.com</title>
+
+	<link rel="stylesheet" href="css/general.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+</head>
+<body>
+	<div class="container">
+		<div class="btn-group">
+        	<button type="button" class="btn btn-default">Select a program</button>
+        	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          		<span class="caret"></span>
+        	</button>
+        	<ul class="dropdown-menu" role="menu">
+          		<li><a href="#" ng-click="changeProgram(1)">Up</a></li>
+          		<li><a href="#" ng-click="changeProgram(2)">Down</a></li>
+          		<li><a href="#" ng-click="changeProgram(3)">Intervals</a></li>
+        	</ul>
+      	</div>
+      	<audio id='beep'>
+      		<source src="content/snd/beep.mp3" type="audio/mpeg" /></source>
+      	</audio>
+
+		<div class="up">
+			<div class="row">
+				<div class="col-xs-1"><span>Uptime:</span></div>
+				<div class="col-xs-2"><input type="text" ng-model="uptime"></div>
+				<div class="col-xs-2"><span>in minutes</span></div>
+			</div>
+		</div>
+
+		<div class="down">
+			<div class="row">
+				<div class="col-xs-1"><span>Downtime:</span></div>
+				<div class="col-xs-2"><input type="text"></div>
+				<div class="col-xs-2"><span>in minutes</span></div>
+			</div>
+		</div>
+
+		<div class="intervals"></div>
+
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-8">
+				<button  ng-click="start()" type="button" class="btn btn-default">Start</button>		
+				<button  ng-click="stop()" type="button" class="btn btn-default">Stop</button>
+			</div>
+		</div>
+	</div>
+		<div id="timer" class="row">
+			<program class="col-xs-2"></program>
+			<clock class="col-xs-10"></clock>
+		</div>
+		
+	
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/controllers.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			$('.down').hide();
+			$('.interval').hide();
+
+			$('#beep')[0].play();
+		});
+	</script>
+	
+</body>
+</html>
