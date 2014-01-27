@@ -1,75 +1,99 @@
 <!doctype html>
 <html ng-app="app" ng-controller="timerController">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Geonunez.com</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geonunez.com</title>
 
-	<link rel="stylesheet" href="css/general.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 </head>
 <body>
-	<div class="container">
-		<div class="btn-group">
-        	<button type="button" class="btn btn-default">Select a program</button>
-        	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          		<span class="caret"></span>
-        	</button>
-        	<ul class="dropdown-menu" role="menu">
-          		<li><a href="#" ng-click="changeProgram(1)">Up</a></li>
-          		<li><a href="#" ng-click="changeProgram(2)">Down</a></li>
-          		<li><a href="#" ng-click="changeProgram(3)">Intervals</a></li>
-        	</ul>
-      	</div>
-      	<audio id='beep'>
-      		<source src="content/snd/beep.mp3" type="audio/mpeg" /></source>
-      	</audio>
+    <div class="container">
 
-		<div class="up">
-			<div class="row">
-				<div class="col-xs-1"><span>Uptime:</span></div>
-				<div class="col-xs-2"><input type="text" ng-model="uptime"></div>
-				<div class="col-xs-2"><span>in minutes</span></div>
-			</div>
-		</div>
+        <audio id='beep'>
+            <source src="content/snd/beep.mp3" type="audio/mpeg" /></source>
+        </audio>
 
-		<div class="down">
-			<div class="row">
-				<div class="col-xs-1"><span>Downtime:</span></div>
-				<div class="col-xs-2"><input type="text"></div>
-				<div class="col-xs-2"><span>in minutes</span></div>
-			</div>
-		</div>
+        <div id="timer" class="row">
+            <program class="col-xs-2"></program>
+            <clock class="col-xs-10"></clock>
+        </div>
 
-		<div class="intervals"></div>
+        <div class="row">
+            <div class="col-xs-2">
+                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Customize</button>
+            </div>
+            <div class="col-xs-3 col-xs-offset-7 col-lg-2 col-lg-offset-8">
+                <button  ng-click="start()" type="button" class="btn btn-primary btn-lg">Start</button>        
+                <button  ng-click="stop()" type="button" class="btn btn-danger btn-lg">Stop</button>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-xs-4 col-xs-offset-8">
-				<button  ng-click="start()" type="button" class="btn btn-default">Start</button>		
-				<button  ng-click="stop()" type="button" class="btn btn-default">Stop</button>
-			</div>
-		</div>
-	</div>
-		<div id="timer" class="row">
-			<program class="col-xs-2"></program>
-			<clock class="col-xs-10"></clock>
-		</div>
-		
-	
-	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/controllers.js"></script>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	
-	<script>
-		$(document).ready(function(){
-			$('.down').hide();
-			$('.interval').hide();
 
-			$('#beep')[0].play();
-		});
-	</script>
-	
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Customize CrossTimer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">Select a program</button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" ng-click="changeProgram(1)">Up</a></li>
+                                <li><a href="#" ng-click="changeProgram(2)">Down</a></li>
+                                <li><a href="#" ng-click="changeProgram(3)">Intervals</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="up">
+                            <div class="row">
+                                <div class="col-xs-1"><span>Uptime:</span></div>
+                                <div class="col-xs-2"><input type="text" ng-model="uptime"></div>
+                                <div class="col-xs-2"><span>in minutes</span></div>
+                            </div>
+                        </div>
+
+                        <div class="down">
+                            <div class="row">
+                                <div class="col-xs-1"><span>Downtime:</span></div>
+                                <div class="col-xs-2"><input type="text"></div>
+                                <div class="col-xs-2"><span>in minutes</span></div>
+                            </div>
+                        </div>
+
+                        <div class="intervals"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+    </div>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+        $('.down').hide();
+        $('.interval').hide();
+
+        $('#beep')[0].play();
+    });
+    </script>
+
 </body>
 </html>
