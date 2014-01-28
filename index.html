@@ -48,28 +48,24 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#" ng-click="changeProgram(1)">Up</a></li>
-                                <li><a href="#" ng-click="changeProgram(2)">Down</a></li>
+                                <!--<li><a href="#" ng-click="changeProgram(2)">Down</a></li>-->
                                 <li><a href="#" ng-click="changeProgram(3)">Intervals</a></li>
                             </ul>
                         </div>
-
-                        <div class="up">
-                            <div class="row">
-                                <div class="col-xs-1"><span>Uptime:</span></div>
-                                <div class="col-xs-2"><input type="text" ng-model="uptime"></div>
-                                <div class="col-xs-2"><span>in minutes</span></div>
-                            </div>
+                        <br /><br />
+                        <div id="up">
+                            <span>Max time:</span>
+                            <timepicker></timepicker>
+                            <span>in minutes</span>
                         </div>
 
-                        <div class="down">
-                            <div class="row">
-                                <div class="col-xs-1"><span>Downtime:</span></div>
-                                <div class="col-xs-2"><input type="text"></div>
-                                <div class="col-xs-2"><span>in minutes</span></div>
-                            </div>
-                        </div>
+                        <!--<div id="down">
+                            <span>Downtime:</span>
+                            <input type="text">
+                            <span>in minutes</span>
+                        </div>-->
 
-                        <div class="intervals"></div>
+                        <div id="intervals"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -88,10 +84,10 @@
 
     <script>
     $(document).ready(function(){
-        $('.down').hide();
-        $('.interval').hide();
+        //$('#down').hide();
+        $('#intervals').hide();
 
-        $('#beep')[0].play();
+        //$('#beep')[0].play();
     });
     </script>
 
