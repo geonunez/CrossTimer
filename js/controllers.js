@@ -4,6 +4,7 @@ app.controller('timerController',function($scope,$timeout){
 
     $scope.now;
     $scope.animate = false;
+    $scope.beep = false;
 
     var begin;
     $scope.timeoutId;
@@ -12,9 +13,9 @@ app.controller('timerController',function($scope,$timeout){
         if ($scope.program === 1){
             begin = new Date();
             $scope.timeoutId = setInterval(function(){
+                var now = new Date(new Date().getTime() - begin.getTime());
                 $scope.$apply(function(){
-                    $scope.now = 
-                    new Date(new Date().getTime() - begin.getTime());
+                    $scope.now = now;
                 });
             },1000);
         }
@@ -24,6 +25,13 @@ app.controller('timerController',function($scope,$timeout){
         $scope.animate = true;
         clearInterval($scope.timeoutId);
         $timeout(function(){$scope.timeoutId = 0;},500);
+        
+        if ($scope.beep){
+            var audio = document.getElementById("beep");
+            audio.load();
+            audio.play();
+            $scope.beep = false;
+        }
     };
 
     $scope.changeProgram = function(program){
@@ -54,6 +62,12 @@ app.directive("clock",function(){
             scope.seconds = scope.now.getUTCSeconds() < 10 ?
             "0" + scope.now.getUTCSeconds() :
             scope.now.getUTCSeconds();
+
+            if (scope.minutes == 10)
+            {
+                scope.beep = true;
+                scope.stop();
+            }
         });
 
         scope.$watch('animate',function(){
