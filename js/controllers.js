@@ -6,10 +6,15 @@ app.controller('timerController',function($scope,$timeout){
     $scope.animate = false;
     $scope.beep = false;
 
+    //Uptime
+    $scope.maxMinutes = 0;
+    $scope.maxSeconds = 0;
+
     var begin;
     $scope.timeoutId;
 
     $scope.start = function(){
+        console.log("Program:" + $scope.program + ", Max minutes: " + $scope.maxMinutes + ", Max seconds:" + $scope.maxSeconds);
         if ($scope.program === 1){
             begin = new Date();
             $scope.timeoutId = setInterval(function(){
@@ -63,7 +68,10 @@ app.directive("clock",function(){
             "0" + scope.now.getUTCSeconds() :
             scope.now.getUTCSeconds();
 
-            if (scope.minutes == 10)
+            //Uptime and minutes and seconds are equals to max values
+            if (scope.program == 1 &&
+                scope.minutes == scope.maxMinutes &&
+                scope.seconds == scope.maxSeconds)
             {
                 scope.beep = true;
                 scope.stop();
@@ -125,6 +133,27 @@ app.directive('timepicker', function(){
     return {
         link : link,
         restrict: 'E',
-        template: "<span class='glyphicon glyphicon-star'></span>"
+        templateUrl: 'timePicker.html'
     };
 });
+
+app.directive('', ['', function(){
+    // Runs during compile
+    return {
+        // name: '',
+        // priority: 1,
+        // terminal: true,
+        // scope: {}, // {} = isolate, true = child, false/undefined = no change
+        // controller: function($scope, $element, $attrs, $transclude) {},
+        // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+        // restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
+        // template: '',
+        // templateUrl: '',
+        // replace: true,
+        // transclude: true,
+        // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+        link: function($scope, iElm, iAttrs, controller) {
+            
+        }
+    };
+}]);

@@ -47,16 +47,20 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#" ng-click="changeProgram(1)">Up</a></li>
-                                <!--<li><a href="#" ng-click="changeProgram(2)">Down</a></li>-->
-                                <li><a href="#" ng-click="changeProgram(3)">Intervals</a></li>
+                                <li><a href="#" id="program1" ng-click="changeProgram(1)">Up</a></li>
+                                <!--<li><a href="#" id="program2" ng-click="changeProgram(2)">Down</a></li>-->
+                                <li><a href="#" id="program3" ng-click="changeProgram(3)">Intervals</a></li>
                             </ul>
                         </div>
-                        <br /><br />
+                        <!-- UP -->
                         <div id="up">
-                            <span>Max time:</span>
-                            <timepicker></timepicker>
-                            <span>in minutes</span>
+                            <h4>Up</h4>
+                            <div class="input-group">
+                              <span class="input-group-addon">Up to:&nbsp;</span>
+                              <input type="number" class="form-control" min="0" max="99" placeholder="Minutes" ng-model="maxMinutes">
+                              <span class="input-group-addon">:</span>
+                              <input type="number" class="form-control" min="0" max="59" placeholder="Seconds" ng-model="maxSeconds">
+                            </div>
                         </div>
 
                         <!--<div id="down">
@@ -86,6 +90,24 @@
     $(document).ready(function(){
         //$('#down').hide();
         $('#intervals').hide();
+
+        $('#program1').click(function(){
+            $('#up').show();
+            $('#down').hide();
+            $('#intervals').hide();
+        });
+
+        /*$('#program2').click(function(){
+            $('#up').hide();
+            $('#down').show();
+            $('#intervals').hide();
+        });*/
+
+        $('#program3').click(function(){
+            $('#up').hide();
+            $('#down').hide();
+            $('#intervals').show();
+        });
 
         $('#beep')[0].play();
     });
