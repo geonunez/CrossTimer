@@ -22,14 +22,14 @@ app.controller('timerController',function($scope,$timeout){
                 $scope.$apply(function(){
                     $scope.now = now;
                 });
-            },1000);
+            },4);
         }
     };
 
     $scope.stop = function(){
         $scope.animate = true;
         clearInterval($scope.timeoutId);
-        $timeout(function(){$scope.timeoutId = 0;},500);
+        $timeout(function(){$scope.timeoutId = 0;},1000);
         
         if ($scope.beep){
             var audio = document.getElementById("beep");
@@ -47,18 +47,19 @@ app.controller('timerController',function($scope,$timeout){
 app.directive("clock",function(){
 
     function link(scope,element,attrs){
-        scope.hours = "00";
+        
         scope.minutes = "00";
         scope.seconds = "00";
+        scope.milliseconds = "00";
 
         scope.$watch('now',function(){
 
             $(element).clearQueue();
             $(element).fadeIn(500);
 
-            scope.hours = scope.now.getUTCHours() < 10 ? 
+            /*scope.hours = scope.now.getUTCHours() < 10 ? 
             "0" + scope.now.getUTCHours() : 
-            scope.now.getUTCHours();
+            scope.now.getUTCHours();*/
 
             scope.minutes = scope.now.getUTCMinutes() < 10 ?
             "0" + scope.now.getUTCMinutes() :
@@ -68,11 +69,15 @@ app.directive("clock",function(){
             "0" + scope.now.getUTCSeconds() :
             scope.now.getUTCSeconds();
 
+            scope.milliseconds = scope.now.getUTCMilliseconds().toString().substr(0,2);
+
             //Uptime and minutes and seconds are equals to max values
             if (scope.program == 1 &&
+                scope.minutes !== "00" && scope.seconds !== "00" &&
                 scope.minutes == scope.maxMinutes &&
                 scope.seconds == scope.maxSeconds)
             {
+                scope.milliseconds = "00";
                 scope.beep = true;
                 scope.stop();
             }
@@ -94,7 +99,7 @@ app.directive("clock",function(){
     return {
         link : link,
         restrict: "E",
-        template: "{{hours}} : {{minutes}}  : {{seconds}}"
+        template: "<div class='digit'>{{minutes}}</div>:<div class='digit'>{{seconds}}</div>:<div class='digit'>{{milliseconds}}</div>"
     };
 });
 
@@ -136,24 +141,3 @@ app.directive('timepicker', function(){
         templateUrl: 'timePicker.html'
     };
 });
-
-app.directive('', ['', function(){
-    // Runs during compile
-    return {
-        // name: '',
-        // priority: 1,
-        // terminal: true,
-        // scope: {}, // {} = isolate, true = child, false/undefined = no change
-        // controller: function($scope, $element, $attrs, $transclude) {},
-        // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-        // restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
-        // template: '',
-        // templateUrl: '',
-        // replace: true,
-        // transclude: true,
-        // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-        link: function($scope, iElm, iAttrs, controller) {
-            
-        }
-    };
-}]);

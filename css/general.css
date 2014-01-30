@@ -34,6 +34,11 @@
 	width: 1em;
 }
 
+.digit{
+	width: 115px;
+	display: inline-block;
+}
+
 div.up{
 	margin-top: 15px;
 }
