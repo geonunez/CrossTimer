@@ -57,9 +57,13 @@
                             <h4>Up</h4>
                             <div class="input-group">
                               <span class="input-group-addon">Up to:&nbsp;</span>
-                              <input type="number" class="form-control" min="0" max="99" placeholder="Minutes" ng-model="maxMinutes">
+                              <select class="form-control" ng-model="maxMinutes">
+                                  <option ng-repeat="minute in oMinutes">{{minute}}</option>
+                              </select>
                               <span class="input-group-addon">:</span>
-                              <input type="number" class="form-control" min="0" max="59" placeholder="Seconds" ng-model="maxSeconds">
+                              <select class="form-control" ng-model="maxSeconds">
+                                  <option ng-repeat="second in oSeconds">{{second}}</option>
+                              </select>
                             </div>
                         </div>
 

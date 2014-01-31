@@ -13,6 +13,14 @@ app.controller('timerController',function($scope,$timeout){
     var begin;
     $scope.timeoutId;
 
+    $scope.oMinutes = new Array();
+    $scope.oSeconds = new Array();
+    for (var i=0;i<100;i++){
+        $scope.oMinutes[i] = i;
+        if (i<60)
+            $scope.oSeconds[i] = i;
+    }
+
     $scope.start = function(){
         console.log("Program:" + $scope.program + ", Max minutes: " + $scope.maxMinutes + ", Max seconds:" + $scope.maxSeconds);
         if ($scope.program === 1){
@@ -22,7 +30,7 @@ app.controller('timerController',function($scope,$timeout){
                 $scope.$apply(function(){
                     $scope.now = now;
                 });
-            },4);
+            },64);
         }
     };
 
@@ -73,7 +81,7 @@ app.directive("clock",function(){
 
             //Uptime and minutes and seconds are equals to max values
             if (scope.program == 1 &&
-                scope.minutes !== "00" && scope.seconds !== "00" &&
+                scope.minutes != "0"  && scope.seconds != "0" &&
                 scope.minutes == scope.maxMinutes &&
                 scope.seconds == scope.maxSeconds)
             {
@@ -99,7 +107,7 @@ app.directive("clock",function(){
     return {
         link : link,
         restrict: "E",
-        template: "<div class='digit'>{{minutes}}</div>:<div class='digit'>{{seconds}}</div>:<div class='digit'>{{milliseconds}}</div>"
+        templateUrl: "clock.html"
     };
 });
 
