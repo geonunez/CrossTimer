@@ -41,17 +41,23 @@
                         <h4 class="modal-title" id="myModalLabel">Customize CrossTimer</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default">Select a program</button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#" id="program1" ng-click="changeProgram(1)">Up</a></li>
-                                <!--<li><a href="#" id="program2" ng-click="changeProgram(2)">Down</a></li>-->
-                                <li><a href="#" id="program3" ng-click="changeProgram(3)">Intervals</a></li>
-                            </ul>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">Program:</span>
+                            <select class="form-control">
+                                <option ng-click="changeProgram(1)">Up</option>
+                                <!--<option ng-click="changeProgram(2)">Down</option>-->
+                                <option ng-click="changeProgram(3)">Intervals</option>
+                            </select>
                         </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Wait:</span>
+                            <select class="form-control" ng-model="waitFor">
+                                <option ng-repeat="second in oSeconds">{{second}}</option>
+                            </select>
+                            <span class="input-group-addon">second(s)</span>
+                        </div>
+                        
                         <!-- UP -->
                         <div id="up">
                             <h4>Up</h4>

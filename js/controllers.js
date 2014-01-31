@@ -6,6 +6,8 @@ app.controller('timerController',function($scope,$timeout){
     $scope.animate = false;
     $scope.beep = false;
 
+    $scope.waitFor = 10;
+
     //Uptime
     $scope.maxMinutes = 0;
     $scope.maxSeconds = 0;
@@ -22,8 +24,24 @@ app.controller('timerController',function($scope,$timeout){
     }
 
     $scope.start = function(){
-        console.log("Program:" + $scope.program + ", Max minutes: " + $scope.maxMinutes + ", Max seconds:" + $scope.maxSeconds);
-        if ($scope.program === 1){
+        
+        $scope.minutes = "00";
+        $scope.seconds = "00";
+        $scope.milliseconds = "00";
+        var selectedProgram = $scope.selectedProgram;
+        var waitFor = parseInt($scope.waitFor,10);
+        
+        $scope.timeoutId = setInterval(function(){
+            $scope.selectedProgram = waitFor;
+            waitFor -= 1;
+            if (waitFor === 0){
+                $scope.selectedProgram = selectedProgram;
+                clearInterval($scope.timeoutId);
+            }
+        },995);
+
+        $timeout(function(){
+            if ($scope.program === 1){
             begin = new Date();
             $scope.timeoutId = setInterval(function(){
                 var now = new Date(new Date().getTime() - begin.getTime());
@@ -32,6 +50,9 @@ app.controller('timerController',function($scope,$timeout){
                 });
             },64);
         }
+        }, waitFor * 1000);
+
+        
     };
 
     $scope.stop = function(){
@@ -60,6 +81,11 @@ app.directive("clock",function(){
         scope.seconds = "00";
         scope.milliseconds = "00";
 
+        var minutes;
+        var seconds;
+        var maxMinutes;
+        var maxSeconds;
+
         scope.$watch('now',function(){
 
             $(element).clearQueue();
@@ -80,14 +106,27 @@ app.directive("clock",function(){
             scope.milliseconds = scope.now.getUTCMilliseconds().toString().substr(0,2);
 
             //Uptime and minutes and seconds are equals to max values
-            if (scope.program == 1 &&
-                scope.minutes != "0"  && scope.seconds != "0" &&
-                scope.minutes == scope.maxMinutes &&
-                scope.seconds == scope.maxSeconds)
-            {
-                scope.milliseconds = "00";
-                scope.beep = true;
-                scope.stop();
+            minutes = parseInt(scope.minutes,10);
+            seconds = parseInt(scope.seconds,10);
+
+            if ((minutes === 0  && seconds > 0) || minutes > 0){
+
+                maxMinutes = parseInt(scope.maxMinutes,10);
+                maxSeconds = parseInt(scope.maxSeconds,10);
+
+               //Program 1 - Up
+               if (scope.program === 1 &&
+                ((minutes === maxMinutes && seconds === maxSeconds) ||
+                (minutes === 99 && seconds === 59))){
+                    
+                    scope.milliseconds = 
+                        (minutes === 99 && seconds === 59) ?
+                            "99":
+                            "00";
+
+                    scope.beep = true;
+                    scope.stop();
+                }
             }
         });
 
