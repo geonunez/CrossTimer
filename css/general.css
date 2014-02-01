@@ -11,27 +11,16 @@
 	border: 0.05em #101010 solid;
 	-webkit-border-radius: 0.05em;
     border-radius: 0.05em;
-    color: #cf262a;
-    text-align:center;
-}
-
-#programmer{
-	color: #009cd8;
-	border-right: 0.05em #101010 solid;
-    text-align:center;
-}
-
-#clock{
-	color: #cf262a;
-    text-align:center;
     
+    text-align:center;
 }
 
-#clock input{
+program{
+	color: #2e6ea4;
+}
+
+clock{
 	color: #cf262a;
-	background: transparent;
-	border: none;
-	width: 1em;
 }
 
 .digit{
@@ -43,9 +32,15 @@ div.up{
 	margin-top: 15px;
 }
 
-@media screen and (max-width:480px){
-   #clock input{
-     font-size:40%; 
+@media screen and (max-width:992px){
+   #timer{
+   		font-size:6em;
+   }
+}
+
+@media screen and (max-width:640px){
+   #timer{
+   		font-size:4em;
    }
 }
 
