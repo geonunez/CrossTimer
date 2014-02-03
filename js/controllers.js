@@ -4,7 +4,7 @@ app.controller('timerController',function($scope,$timeout){
 
     /** Attributes **/
 
-    $scope.waitFor = 10; //Seconds
+    $scope.waitFor = 1; //Seconds
     $scope.animate = false; //Indicate if the timer has to blink
     $scope.beep = false; //Indicate if the timer has to beep
     $scope.maxMinutes = 0; //Indicate the max minutes when the timer is upping
@@ -160,9 +160,11 @@ app.directive("clock",function(){
 
             if (typeof $scope.now == "object"){
 
-                $scope.minutes = $scope.now.getUTCMinutes() < 10 ?
+                $scope.minutes = $scope.now.getUTCHours() == 0  && $scope.now.getUTCMinutes() < 10 ?
                 "0" + $scope.now.getUTCMinutes() :
-                $scope.now.getUTCMinutes();
+                $scope.now.getUTCHours() == 0 ?
+                $scope.now.getUTCMinutes() : 
+                60 + $scope.now.getUTCMinutes();
 
                 $scope.seconds = $scope.now.getUTCSeconds() < 10 ?
                 "0" + $scope.now.getUTCSeconds() :
