@@ -13,7 +13,18 @@
     <div class="container">
 
         <audio id='beep'>
+            <source src="content/snd/beep.ogg" type="audio/ogg" /></source>
             <source src="content/snd/beep.mp3" type="audio/mpeg" /></source>
+        </audio>
+
+        <audio id='beepBig'>
+            <source src="content/snd/beepBig.ogg" type="audio/ogg" /></source>
+            <source src="content/snd/beepBig.mp3" type="audio/mpeg" /></source>
+        </audio>
+
+        <audio id='beepDouble'>
+            <source src="content/snd/beepDouble.ogg" type="audio/ogg" /></source>
+            <source src="content/snd/beepDouble.mp3" type="audio/mpeg" /></source>
         </audio>
 
         <div id="timer" class="row">
@@ -22,10 +33,10 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-2">
+            <div class="col-xs-5">
                 <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Customize</button>
             </div>
-            <div class="col-xs-3 col-xs-offset-7 col-lg-2 col-lg-offset-8">
+            <div id="controllers" class="col-xs-7" >
                 <button  ng-click="start()" type="button" class="btn btn-primary btn-lg">Start</button>        
                 <button  ng-click="stop()" type="button" class="btn btn-danger btn-lg">Stop</button>
             </div>
@@ -119,7 +130,7 @@
             $('#intervals').show();
         });
 
-        $('#beep')[0].play();
+        $('#beepDouble')[0].play();
     });
     </script>
 

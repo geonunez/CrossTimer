@@ -1,52 +1,73 @@
+html body{
+  min-width: 320px;
+}
+
 @font-face {
     font-family: "digib";
     src: url(../font/DS-DIGIB.ttf) format("truetype");
 }
 
+program{
+  color: #2e6ea4;
+}
+
+clock{
+  color: #cf262a;
+}
+
+div#controllers{
+  text-align: right;
+}
+
+div.up{
+  margin-top: 15px;
+}
+
 #timer{
-	font-family: digib;
-	font-size:8em;
-	margin:100px 0 25px 0;
-	background: #4c4642;
-	border: 0.05em #101010 solid;
-	-webkit-border-radius: 0.05em;
+  font-family: digib;
+  font-size:8em;
+  margin:100px 0 25px 0;
+  background: #4c4642;
+  border: 0.05em #101010 solid;
+  -webkit-border-radius: 0.05em;
     border-radius: 0.05em;
     
     text-align:center;
 }
 
-program{
-	color: #2e6ea4;
-}
-
-clock{
-	color: #cf262a;
-}
-
 .digit{
-	width: 115px;
-	display: inline-block;
-}
-
-div.up{
-	margin-top: 15px;
+  width: 120px;
+  display: inline-block;
 }
 
 @media screen and (max-width:992px){
    #timer{
-   		font-size:6em;
+      font-size:7em;
    }
 }
 
-@media screen and (max-width:640px){
+@media screen and (max-width:768px){
    #timer{
-   		font-size:4em;
+      font-size:6em;
    }
+
+   .digit{
+    width: 90px;
+  }
 }
 
+@media screen and (max-width:630px){
+   #timer{
+      font-size:4em;
+   }
 
-@media screen and (max-width:1024px){
-   #clock input{
-     font-size:80%; 
+  .digit{
+    width: 50px;
+  }
+}
+
+@media screen and (max-width:420px){
+   #timer{
+      font-size:2.5em;
    }
 }
